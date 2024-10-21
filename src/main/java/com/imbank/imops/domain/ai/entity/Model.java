@@ -1,10 +1,8 @@
-package com.imbank.imops.domain.user.entity;
-
+package com.imbank.imops.domain.ai.entity;
 
 import com.imbank.imops.security.BaseTimeEntity;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotNull;
-import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.ToString;
@@ -18,22 +16,16 @@ import org.hibernate.annotations.DynamicUpdate;
 @DynamicInsert
 @NoArgsConstructor
 @ToString
-public class User extends BaseTimeEntity {
+public class Model extends BaseTimeEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     @NotNull
-    private String username;
+    private String embedding;
 
     @NotNull
-    private String password;
-
-    @Builder
-    public User(String username, String password) {
-        this.username = username;
-        this.password = password;
-    }
+    private String LLM;
 
 }
