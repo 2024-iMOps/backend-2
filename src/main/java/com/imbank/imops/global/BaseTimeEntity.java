@@ -1,4 +1,4 @@
-package com.imbank.imops.security;
+package com.imbank.imops.global;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.EntityListeners;

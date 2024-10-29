@@ -1,6 +1,6 @@
 package com.imbank.imops.domain.ai.entity;
 
-import com.imbank.imops.security.BaseTimeEntity;
+import com.imbank.imops.global.BaseTimeEntity;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotNull;
 import lombok.Getter;
@@ -16,7 +16,7 @@ import org.hibernate.annotations.DynamicUpdate;
 @DynamicInsert
 @NoArgsConstructor
 @ToString
-public class Model extends BaseTimeEntity {
+public class EmbeddingModel extends BaseTimeEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -24,8 +24,5 @@ public class Model extends BaseTimeEntity {
 
     @NotNull
     private String embedding;
-
-    @NotNull
-    private String LLM;
 
 }

@@ -1,6 +1,6 @@
 package com.imbank.imops.domain.ai.entity;
 
-import com.imbank.imops.security.BaseTimeEntity;
+import com.imbank.imops.global.BaseTimeEntity;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotNull;
 import lombok.Getter;

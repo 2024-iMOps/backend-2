@@ -1,7 +1,7 @@
 package com.imbank.imops.domain.user.entity;
 
 
-import com.imbank.imops.security.BaseTimeEntity;
+import com.imbank.imops.global.BaseTimeEntity;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotNull;
 import lombok.Builder;
@@ -29,6 +29,12 @@ public class User extends BaseTimeEntity {
 
     @NotNull
     private String password;
+
+    private String openAi;
+
+    private String anthropic;
+
+    private String upstage;
 
     @Builder
     public User(String username, String password) {
