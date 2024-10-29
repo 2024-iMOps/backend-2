@@ -1,18 +1,21 @@
 package com.imbank.imops.domain.user.entity;
 
 
+
 import com.imbank.imops.global.BaseTimeEntity;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotNull;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.Setter;
 import lombok.ToString;
 import org.hibernate.annotations.DynamicInsert;
 import org.hibernate.annotations.DynamicUpdate;
 
 @Entity
 @Getter
+@Setter
 @Table
 @DynamicUpdate
 @DynamicInsert
@@ -25,6 +28,7 @@ public class User extends BaseTimeEntity {
     private Long id;
 
     @NotNull
+    @Column(unique = true)  // 유니크 제약 조건 추가
     private String username;
 
     @NotNull

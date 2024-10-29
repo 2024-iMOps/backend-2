@@ -1,5 +1,6 @@
 package com.imbank.imops.domain.user.repository;
 
+
 import com.imbank.imops.domain.user.entity.User;
 import org.springframework.data.jpa.repository.JpaRepository;
 
