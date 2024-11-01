@@ -22,7 +22,7 @@ public class ChatRepositoryImpl implements ChatRepositoryCustom {
     public List<ChatResponseDto> getChatList(User user) {
         return queryFactory.select(Projections.constructor(ChatResponseDto.class,
                         chat.id,
-                        chat.question
+                        chat.name
                 ))
                 .from(chat)
                 .where(chat.user.eq(user))

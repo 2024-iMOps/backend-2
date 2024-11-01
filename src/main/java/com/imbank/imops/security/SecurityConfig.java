@@ -40,26 +40,23 @@ public class SecurityConfig {
 
     @Bean
     public SecurityFilterChain springSecurity(HttpSecurity http) throws Exception {
-
-        http.cors().and().csrf().disable()
+        http
+                .csrf().disable()  // CSRF 비활성화 (위치를 가장 앞쪽으로)
+                .cors().and()
                 .exceptionHandling()
                 .authenticationEntryPoint((request, response, authException) -> {
-                    // 유효한 자격증명을 제공하지 않고 접근하려 할때 401
                     response.sendError(HttpServletResponse.SC_UNAUTHORIZED);
                 })
                 .accessDeniedHandler((request, response, accessDeniedException) -> {
-                    // 필요한 권한 없이 접근하려 할때 403
                     response.sendError(HttpServletResponse.SC_FORBIDDEN);
                 })
                 .and()
                 .sessionManagement()
                 .sessionCreationPolicy(SessionCreationPolicy.STATELESS);
 
-
         http.authorizeHttpRequests((authz) -> authz
-                .requestMatchers("/api/v1/**").permitAll()
+                .requestMatchers("/api/v1/**").permitAll()  // /api/v1/** 경로 허용
                 .anyRequest().denyAll());
-
 
         return http.build();
     }

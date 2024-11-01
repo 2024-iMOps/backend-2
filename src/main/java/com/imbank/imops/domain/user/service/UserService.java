@@ -4,6 +4,7 @@ import com.imbank.imops.domain.user.entity.User;
 import com.imbank.imops.domain.user.repository.UserRepository;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 @Service
 public class UserService {
@@ -34,5 +35,26 @@ public class UserService {
             return passwordEncoder.matches(password, user.getPassword());
         }
         return false;
+    }
+
+    @Transactional
+    public void updateOpenAi(Long id, String openAi) {
+        User user = userRepository.findById(id).orElseThrow(() -> new RuntimeException("User not found"));
+        user.setOpenAi(openAi);
+        userRepository.save(user);
+    }
+
+    @Transactional
+    public void updateAnthropic(Long id, String anthropic) {
+        User user = userRepository.findById(id).orElseThrow(() -> new RuntimeException("User not found"));
+        user.setAnthropic(anthropic);
+        userRepository.save(user);
+    }
+
+    @Transactional
+    public void updateUpstage(Long id, String upstage) {
+        User user = userRepository.findById(id).orElseThrow(() -> new RuntimeException("User not found"));
+        user.setUpstage(upstage);
+        userRepository.save(user);
     }
 }

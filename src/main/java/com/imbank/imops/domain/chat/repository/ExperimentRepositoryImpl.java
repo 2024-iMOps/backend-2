@@ -23,7 +23,7 @@ public class ExperimentRepositoryImpl implements ExperimentRepositoryCustom {
     public List<ExperimentResponseDto> getExperimentList(Chat chat) {
         return queryFactory.select(Projections.constructor(ExperimentResponseDto.class,
                         experiment.id,
-                        experiment.score
+                        experiment.score1
                 ))
                 .from(experiment)
                 .where(experiment.chat.eq(chat))
@@ -33,15 +33,13 @@ public class ExperimentRepositoryImpl implements ExperimentRepositoryCustom {
     @Override
     public ExperimentDetailResponseDto getExperimentDetail(Long experimentId) {
         return queryFactory.select(Projections.constructor(ExperimentDetailResponseDto.class,
-                        experiment.chat.question,
+                        experiment.chat.name,
                         experiment.answer,
                         experiment.modelConfiguration.temperature,
                         experiment.modelConfiguration.maxTokens,
                         experiment.modelConfiguration.topP,
                         experiment.modelConfiguration.frequencyPenalty,
                         experiment.modelConfiguration.presencePenalty,
-                        experiment.model.embedding,
-                        experiment.model.LLM,
                         experiment.textChunking.method,
                         experiment.textChunking.size,
                         experiment.textChunking.overlap
