@@ -7,14 +7,11 @@ import lombok.*;
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
-public class ExperimentDetailResponseDto {
-    private String question;
-    private String answer;
+public class AnswerRequestDto {
+    private String username;
+    private Long chatId;
 
-    // Score 값
-    private Integer accuracy;
-    private Integer relevance;
-    private Integer completeness;
+    private String question;
 
     // TextChunking 정보
     private String method;
@@ -25,13 +22,11 @@ public class ExperimentDetailResponseDto {
     private String embedding;
 
     // LLM Model 정보
-    private String LLM;
+    private String llm;
+    private String template;
     private Double temperature;
     private Integer maxTokens;
     private Double topP;
     private Double frequencyPenalty;
     private Double presencePenalty;
-
-    // 참고한 pdf의 정보
-    private String pdfData;
 }

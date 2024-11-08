@@ -1,6 +1,8 @@
 package com.imbank.imops.domain.chat.service;
 
-import com.imbank.imops.domain.chat.dto.ChatResponseDto;
+import com.imbank.imops.domain.chat.dto.ChatListResponseDto;
+import com.imbank.imops.domain.chat.dto.ChatRoomRequestDto;
+import com.imbank.imops.domain.chat.entity.Chat;
 import com.imbank.imops.domain.chat.repository.ChatRepository;
 import com.imbank.imops.domain.user.entity.User;
 import com.imbank.imops.domain.user.repository.UserRepository;
@@ -19,9 +21,21 @@ public class ChatService {
     private final UserRepository userRepository;
 
     @Transactional(readOnly = true)
-    public List<ChatResponseDto> getChatList(String username) {
+    public List<ChatListResponseDto> getChatList(String username) {
         User user = userRepository.findByUsername(username)
                 .orElseThrow(() -> new RuntimeException("없는 유저입니다"));
         return chatRepository.getChatList(user);
+    }
+
+    @Transactional
+    public Long makeChat(ChatRoomRequestDto chatRoomRequestDto) {
+        User user = userRepository.findByUsername(chatRoomRequestDto.getUsername())
+                .orElseThrow(() -> new RuntimeException("없는 유저입니다"));
+
+        return chatRepository.saveAndFlush(Chat.builder()
+                .user(user)
+                .name(chatRoomRequestDto.getChatRoomName())
+                .description(chatRoomRequestDto.getDescription())
+                .build()).getId();
     }
 }

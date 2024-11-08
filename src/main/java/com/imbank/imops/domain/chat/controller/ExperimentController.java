@@ -1,5 +1,7 @@
 package com.imbank.imops.domain.chat.controller;
 
+import com.imbank.imops.domain.chat.dto.AnswerRequestDto;
+import com.imbank.imops.domain.chat.dto.AnswerResponseDto;
 import com.imbank.imops.domain.chat.dto.ExperimentDetailResponseDto;
 import com.imbank.imops.domain.chat.dto.ExperimentResponseDto;
 import com.imbank.imops.domain.chat.service.ExperimentService;
@@ -8,9 +10,7 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -56,4 +56,24 @@ public class ExperimentController {
         }
         return ResponseEntity.ok(message);
     }
+
+    @PostMapping
+    public ResponseEntity<Message> runExperiment(@RequestBody AnswerRequestDto answerRequestDto) {
+        log.info("ExperimentController/runExperiment : " + answerRequestDto);
+
+        Message message = new Message();
+
+        try {
+            List<AnswerResponseDto> data = experimentService.runExperiment(answerRequestDto);
+            message.setMessage("실험 실행 성공");
+            message.setData(data);
+        } catch (Exception e) {
+            log.error("ExperimentController/runExperiment : " + e.getMessage(), e);
+            message.setMessage(e.getMessage());
+            return ResponseEntity.badRequest().body(message);
+        }
+        return ResponseEntity.ok(message);
+    }
+
+
 }

@@ -4,6 +4,7 @@ import com.imbank.imops.domain.user.entity.User;
 import com.imbank.imops.global.BaseTimeEntity;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotNull;
+import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.ToString;
@@ -28,4 +29,14 @@ public class Chat extends BaseTimeEntity {
 
     @NotNull
     private String name;
+
+    @NotNull
+    private String description;
+
+    @Builder
+    public Chat(User user, String name, String description) {
+        this.user = user;
+        this.name = name;
+        this.description = description;
+    }
 }

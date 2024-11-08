@@ -10,10 +10,11 @@ import java.time.LocalDateTime;
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
-public class ExperimentResponseDto {
+public class ChatListResponseDto {
     private Long id;
-    private String question;
-    private String answer;
+    private String name;
+    private String description;
+    private Long countOfExperiment;
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd HH:mm", timezone = "Asia/Seoul")
     private LocalDateTime modifiedAt;
 }

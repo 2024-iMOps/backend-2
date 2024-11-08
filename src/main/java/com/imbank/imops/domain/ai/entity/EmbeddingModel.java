@@ -2,7 +2,7 @@ package com.imbank.imops.domain.ai.entity;
 
 import com.imbank.imops.global.BaseTimeEntity;
 import jakarta.persistence.*;
-import jakarta.validation.constraints.NotNull;
+import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.ToString;
@@ -22,7 +22,10 @@ public class EmbeddingModel extends BaseTimeEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @NotNull
-    private String embedding;
+    private String embeddingModel;
 
+    @Builder
+    public EmbeddingModel(String embeddingModel) {
+        this.embeddingModel = embeddingModel;
+    }
 }

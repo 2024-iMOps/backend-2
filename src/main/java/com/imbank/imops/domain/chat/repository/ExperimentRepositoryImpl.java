@@ -23,7 +23,9 @@ public class ExperimentRepositoryImpl implements ExperimentRepositoryCustom {
     public List<ExperimentResponseDto> getExperimentList(Chat chat) {
         return queryFactory.select(Projections.constructor(ExperimentResponseDto.class,
                         experiment.id,
-                        experiment.score1
+                        experiment.question,
+                        experiment.answer,
+                        experiment.modifiedAt
                 ))
                 .from(experiment)
                 .where(experiment.chat.eq(chat))
@@ -33,16 +35,22 @@ public class ExperimentRepositoryImpl implements ExperimentRepositoryCustom {
     @Override
     public ExperimentDetailResponseDto getExperimentDetail(Long experimentId) {
         return queryFactory.select(Projections.constructor(ExperimentDetailResponseDto.class,
-                        experiment.chat.name,
+                        experiment.question,
                         experiment.answer,
+                        experiment.accuracy,
+                        experiment.relevance,
+                        experiment.completeness,
+                        experiment.textChunking.method,
+                        experiment.textChunking.size,
+                        experiment.textChunking.overlap,
+                        experiment.embeddingModel.embeddingModel,
+                        experiment.modelConfiguration.LLM,
                         experiment.modelConfiguration.temperature,
                         experiment.modelConfiguration.maxTokens,
                         experiment.modelConfiguration.topP,
                         experiment.modelConfiguration.frequencyPenalty,
                         experiment.modelConfiguration.presencePenalty,
-                        experiment.textChunking.method,
-                        experiment.textChunking.size,
-                        experiment.textChunking.overlap
+                        experiment.pdfData
                 )).from(experiment)
                 .where(experiment.id.eq(experimentId))
                 .fetchOne();

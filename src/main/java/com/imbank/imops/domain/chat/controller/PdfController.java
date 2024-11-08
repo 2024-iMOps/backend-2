@@ -1,7 +1,7 @@
 package com.imbank.imops.domain.chat.controller;
 
-import com.imbank.imops.domain.chat.entity.Pdf; // Pdf 경로
-import com.imbank.imops.domain.chat.repository.PdfRepository; // PdfRepository 경로
+import com.imbank.imops.domain.chat.entity.Pdf;
+import com.imbank.imops.domain.chat.repository.PdfRepository;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -14,7 +14,7 @@ import java.util.Optional;
 import java.util.stream.Collectors;
 
 @RestController
-@RequestMapping("/api/v1/pdf")
+@RequestMapping("api/v1/pdf")
 public class PdfController {
 
     private final PdfRepository pdfRepository;
